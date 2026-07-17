@@ -1,16 +1,22 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+// Routes
 app.get("/", (req, res) => {
-  res.send("DevPilot API Running");
+  res.send("DevWorkspaceLab API Running");
 });
 
-module.exports = app;
+app.use("/api/auth", authRoutes);
+
+export default app;
